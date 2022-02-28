@@ -1,7 +1,10 @@
-import fetchApi from './utils'
+import fetchApi from './utils';
+import Instance from './Instance';
+import Collaborator from './Collaborator';
+import Document from './Document';
 
 
-class Channel {
+class Channel extends Instance {
     constructor() {
         this.slug;
         this.isChannel = true
@@ -19,5 +22,24 @@ class Channel {
         let headers;
         return fetchApi('/channel/rule', 'PUT', headers , {privacy: privacy, data: params});
     }
-
+    createOrRefreshSpeakersToken() {
+        return this.put('/channel/speakers-token');
+    }
+    removeSpeakersToken() {
+        return this.delete('/channel/speakers-token');
+    }
+    getSpeakersToken() {
+        return this.get('/channel/speakers-token');
+    }
+    getReplays() {
+        return $this.get('/channel/videos');
+    }
+    updateSettings(params) {
+        return this.post('/channel/settings', {
+            'body': {
+                'data': params
+            }
+        });
+    }
 }
+export default Channel;

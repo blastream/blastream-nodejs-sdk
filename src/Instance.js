@@ -1,3 +1,5 @@
+import { fetchApi } from "./utils";
+
 class Instance {
     static request_url = 'https://api.v2.blastream.com';
     static app_url =  'app.v2.blastream.com';
@@ -64,5 +66,62 @@ class Instance {
     isV1() {
         return this.version == 1 ? true : false;
     }
+
+    get(url, params = []) {
+        params['method'] = 'GET';
+        return fetchApi(url, params);
+    }
+    
+    post(url, params = []) {
+        params['method'] = 'POST';
+        return fetchApi(url, params);
+    }
+    
+    put(url, params = []) {
+        params['method'] = 'PUT';
+        return fetchApi(url, params);
+    }
+    
+    delete(url, params = []) {
+        params['method'] = 'DELETE';
+        return fetchApi(url, params);
+    }
+    
+    thowException(error) {
+        throw new Error(error);
+    }
+    
+    getIframe(width, height, params = []) {
+        
+        let url;
+        if(!isset(params['url']))
+            url = this.getUrl();
+        else {
+            url = params['url'];
+            unset(params['url']);
+        }
+        
+        let style = '';
+        if(params['style']) {
+            style = params['style'];
+            delete params['style']
+        }
+        
+        params['embed'] = 1
+        
+        
+        url = url+ '&' + new URLSearchParams(params);
+
+        $htmlFrame = '<iframe allow="microphone; camera; display-capture" width="'+width+'" height="'+height+'" src="' +url +'" frameborder="0" scrolling="no" allowFullScreen="true" style="' + style + '" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
+
+        return $htmlFrame;
+    }
+    getUrl() {
+        url = this._channel_url;
+        if (this._whitelabel_url) { url = url.replace(this._app_url, this._whitelabel_url) };
+        return url + '?token=' + this._token + '&api=' + this._public_key;
+    }
     
 };
+
+export default Instance;
