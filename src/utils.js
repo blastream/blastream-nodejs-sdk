@@ -1,4 +1,4 @@
-export async function fetchApi(extension, params) {
+export async function fetchApi(extension, params = {}) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json')
     if(params['method'] !== 'GET') {
