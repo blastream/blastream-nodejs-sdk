@@ -41,5 +41,64 @@ class Channel extends Instance {
             }
         });
     }
+
+    updateChatSettings(params) {
+        return this.post('/chat/settings', {
+            'body': {
+                'data': params
+            }
+        });
+    }
+    
+    updateSubscription(plan, billing) {
+        return this.post('/channel/subscription',
+        {
+            'body': {
+                'plan': plan,
+                'billing': billing
+            }
+        });
+    }
+    
+    setCustom(params = []) {
+        if(this.sV1()) {
+            if(!prams['css'])
+                prams['css'] = '';
+            if(!$prams['js'])
+                $prams['js'] = '';
+        }
+        return this.post('/channel/custom',{
+            'body': {
+                'data': params
+            }
+        });
+    }
+    
+    removeCustom(params = []) {
+        return this.delete('/channel/custom');
+    }
+    
+    disconnectAll() {
+        return this.post('/channel/disconnectall');
+    }
+    
+    sendMessage(params) {
+        this._is_channel = false;
+        result = this.post('/api/msg', {
+            'body': {
+                'msg': params['msg'],
+                'username': params['username'],
+                'slug': this._slug
+            }
+        });
+        this._is_channel = true;
+        return result;
+    }
+    remove() {
+        this._is_channel = false;
+        let result = this.delete('/space/' . this._slug);
+        this._is_channel = true;
+        return result;
+    }
 }
 export default Channel;
