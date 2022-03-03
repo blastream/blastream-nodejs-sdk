@@ -1,0 +1,24 @@
+{
+  "name": "blastream-node-sdk",
+  "version": "1.0.0",
+  "description": "package to have blastream functions easily through a node module",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reyemneirda/blastream-node-sdk.git"
+  },
+  "keywords": [
+    "blastream",
+    "live",
+    "video"
+  ],
+  "author": "Stream Invaders",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reyemneirda/blastream-node-sdk/issues"
+  },
+  "homepage": "https://github.com/Reyemneirda/blastream-node-sdk#readme"
+}
