@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Reyemneirda/blastream-node-sdk.git"
+    "url": "git+https://github.com/Blastream/blastream-nodejs-sdk"
   },
   "keywords": [
     "blastream",
