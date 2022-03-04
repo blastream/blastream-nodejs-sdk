@@ -6,8 +6,8 @@ class Scene {
         this._instance = instance;
     }
     
-    update(data) {
-        res = this._instance.post('/channel/scene/' + this._data['id'], {
+    async update(data) {
+        res = await this._instance.post('/channel/scene/' + this._data['id'], {
             body: {
                 data:data
             }
@@ -23,26 +23,26 @@ class Scene {
         return this._data['default_scene'];
     }
     
-    remove(id, data) {
-        this._instance.delete('/channel/scene/' + this._data['id']);
+    async remove(id, data) {
+       await this._instance.delete('/channel/scene/' + this._data['id']);
     }
  
     
-    createScene(name, data) {
+    async createScene(name, data) {
         if(this.isV1())
             return;
         data['name'] = name;
-        return new Scene(this.put('/channel/scene', {
+        return new Scene(await this.put('/channel/scene', {
             body: {
                 data:data
             }
         }), this);
     }
     
-    getScenes() {
+    async getScenes() {
         if(this.isV1())
             return [];
-        list = this.get('/channel/scenes');
+        list = await this.get('/channel/scenes');
         scenes = [];
         list['list'].foreach(  (scene) => {
             scenes.push(new Scene(scene, this));
@@ -50,17 +50,17 @@ class Scene {
         return scenes;
     }
     
-    getScene(id) {
+    async getScene(id) {
         if(this.isV1())
             return;
-        scene = this.get('/channel/scene/' + id);
+        scene = await this.get('/channel/scene/' + id);
         return new Scene(scene, this);;
     }
     
-    uploadScenePic(type, file) {
+    async uploadScenePic(type, file) {
         if(this.isV1())
             return;
-        res = this.post('/broadcaster/upload/' + type, {
+        res = await this.post('/broadcaster/upload/' + type, {
             file: file,
             name: basename(file)
         });

@@ -22,7 +22,7 @@ class Space extends Instance {
         this._slug = slug;
     }
     
-    createOrGetChannel(slug, params = {}) {
+    async createOrGetChannel(slug, params = {}) {
         this.setSlug(slug);
         
         if(this.isV1()) {
@@ -34,15 +34,15 @@ class Space extends Instance {
                     status: 'broadcaster'
                 }
             };
-            result = this.post('/api/token/request', params);
+            result = await this.post('/api/token/request', params);
         }
         else
-            result = this.post('/space/channel/' + this._slug, params);
+            result = await this.post('/space/channel/' + this._slug, params);
         
         return this.initChannel(result);
     }
 
-    createOrGetParticipant(slug, id, params = []) {
+    async createOrGetParticipant(slug, id, params = []) {
         this.setSlug(slug);
         
         if (!id)
@@ -65,10 +65,10 @@ class Space extends Instance {
                 }
             };
             
-            result = this.post('/api/token/request', params);
+            result = await this.post('/api/token/request', params);
         }
         else
-            result = this.post('/space/channel/' + this._slug + '/participant', {
+            result = await this.post('/space/channel/' + this._slug + '/participant', {
                 body: params
             });
         
@@ -84,16 +84,16 @@ class Space extends Instance {
         return this._token;
     }
     
-    revokeToken(token) {
-        return this.post('/space/revoke-token/' + token);
+    async revokeToken(token) {
+        return await this.post('/space/revoke-token/' + token);
     }
     
-    revokeTokens(slug) {
-        return this.post('/space/revoke-tokens/' + slug);
+    async revokeTokens(slug) {
+        return await this.post('/space/revoke-tokens/' + slug);
     }
     
-    registerHook(url) {
-        return this.post('/space/hook', {
+    async registerHook(url) {
+        return await this.post('/space/hook', {
             body:{
                 url:url
             }

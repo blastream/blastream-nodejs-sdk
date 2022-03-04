@@ -67,24 +67,24 @@ class Instance {
         return this.version == 1 ? true : false;
     }
 
-    get(url, params = []) {
+    async get(url, params = []) {
         params['method'] = 'GET';
-        return fetchApi(url, params);
+        return await fetchApi(url, params);
     }
     
-    post(url, params = []) {
+    async post(url, params = []) {
         params['method'] = 'POST';
-        return fetchApi(url, params);
+        return await fetchApi(url, params);
     }
     
-    put(url, params = []) {
+    async put(url, params = []) {
         params['method'] = 'PUT';
-        return fetchApi(url, params);
+        return await fetchApi(url, params);
     }
     
-    delete(url, params = []) {
+    async delete(url, params = []) {
         params['method'] = 'DELETE';
-        return fetchApi(url, params);
+        return await fetchApi(url, params);
     }
     
     thowException(error) {

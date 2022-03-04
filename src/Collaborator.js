@@ -1,5 +1,4 @@
 import fetchApi from './utils';
-import Collaborator from './Collaborator';
 
 
 class Collaborator {

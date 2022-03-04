@@ -3,7 +3,7 @@ const { default: Instance } = require("./Instance");
 import Instance from './Instance'
 
 class Document extends Instance {
-    uploadPic(name, file = false) {
+    async uploadPic(name, file = false) {
         if(file === false) {
             file = $name;
             name = basename($file);
@@ -12,7 +12,7 @@ class Document extends Instance {
         var data = new FormData()
         data.append('file', file)
         data.append('name', name)
-        return this.post('/broadcaster/upload/pic', {body:data});
+        return await this.post('/broadcaster/upload/pic', {body:data});
     }
 }
 
