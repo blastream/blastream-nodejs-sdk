@@ -1,4 +1,4 @@
-import { fetchApi } from "./utils";
+import { fetchApi } from "./utils/api";
 
 class Instance {
     static request_url = 'https://api.v2.blastream.com';
