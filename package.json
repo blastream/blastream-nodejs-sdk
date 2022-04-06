@@ -24,7 +24,12 @@
   },
   "homepage": "https://github.com/Reyemneirda/blastream-node-sdk#readme",
   "dependencies": {
-    "custom-env": "^2.0.1",
-    "node-fetch": "^3.2.2"
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-wildcard": "^5.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
   }
 }

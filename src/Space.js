@@ -1,11 +1,8 @@
-
-'use strict';
-
-
-import Channel from "./Channel";
+import Channel from './Channel';
 
 export default class Space  {
-    initChannel(result) {
+    
+/*    initChannel(result) {
         
         let channel = new Channel(this._slug, this._public_key, this._public_key, this._whitelabel_url);
         channel.setRequestUrl(this._request_url);
@@ -101,6 +98,6 @@ export default class Space  {
                 url:url
             }
         });
-    }
+    }*/
 
 }
