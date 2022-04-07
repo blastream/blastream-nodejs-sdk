@@ -12,9 +12,9 @@ npm install blastream
 ### Init
 
 ```js
-const Blastream = require('./build/blastream').default; 
+const Blastream = require('blastream').default;
 //or in es6
-//import Blastream from './Blastream';
+//import Blastream from 'blastream';
 let PUBLIC_KEY = 'XXXXXX';
 let PRIVATE_KEY = 'YYYYYY';
 let blastream = new Blastream(PUBLIC_KEY, PRIVATE_KEY); 
