@@ -1,12 +1,11 @@
 {
   "name": "blastream",
   "version": "1.0.0",
-  "description": "package to have blastream functions easily through a node module",
+  "description": "package to play with blastream Rest API easily through a node module",
   "type": "module",
-  "main": "index.js",
+  "main": "build/blastream.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-specifier-resolution=node index"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,17 +19,20 @@
   "author": "Stream Invaders",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Reyemneirda/blastream-node-sdk/issues"
+    "url": "https://github.com/blastream/blastream-nodejs-sdk/issues"
   },
-  "homepage": "https://github.com/Reyemneirda/blastream-node-sdk#readme",
+  "homepage": "https://github.com/blastream/blastream-nodejs-sdk#readme",
   "dependencies": {
     "form-data": "^4.0.0",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.5",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-wildcard": "^5.0.0",
     "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "regenerator-runtime": "^0.13.9"
   }
 }
