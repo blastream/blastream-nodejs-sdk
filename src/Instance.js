@@ -64,8 +64,17 @@ export default class Instance {
     async fetchApi(uri, params = {}) {
         let headers = {};
         
-        if (!params['json'] || params['json'] != false) 
+        if(params.body && params.file) {
+            headers['Content-Type'] = 'multipart/form-data';
+        }
+        
+        if (params.json !== false)  {
             headers['Content-Type'] = 'application/json';
+            if(params.body)
+                params.body = JSON.stringify(params.body);
+        }
+        
+        
         
         if(!this._is_channel) {
             headers['X-Api-Public'] = this.public_key;
@@ -79,28 +88,27 @@ export default class Instance {
         
         params['headers'] = headers;
         
-        console.log(this.request_url + uri);
-        let query = await fetch(this.request_url + uri, params)
+        let query = await fetch(this.request_url + uri, params);
         let res = await query.json();
         return res
     }
 
-    async get(url, params = []) {
+    async get(url, params = {}) {
         params['method'] = 'GET';
         return await this.fetchApi(url, params);
     }
     
-    async post(url, params = []) {
+    async post(url, params = {}) {
         params['method'] = 'POST';
         return await this.fetchApi(url, params);
     }
     
-    async put(url, params = []) {
+    async put(url, params = {}) {
         params['method'] = 'PUT';
         return await this.fetchApi(url, params);
     }
     
-    async delete(url, params = []) {
+    async delete(url, params = {}) {
         params['method'] = 'DELETE';
         return await this.fetchApi(url, params);
     }
@@ -109,7 +117,7 @@ export default class Instance {
         throw new Error(error);
     }
     
-    getIframe(width, height, params = []) {
+    getIframe(width, height, params = {}) {
         
         let url;
         if(!params['url'])
@@ -164,11 +172,10 @@ export default class Instance {
     async createOrGetChannel(slug, params = {}) {
         this.setSlug(slug);
         let result = await this.post('/space/channel/' + this._slug, params);
-        console.log('result', result)
         return this.initChannel(result);
     }
 
-    async createOrGetParticipant(slug, id, params = []) {
+    async createOrGetParticipant(slug, id, params = {}) {
         this.setSlug(slug);
         
         if (!id)
@@ -207,7 +214,7 @@ export default class Instance {
     
     async registerHook(url) {
         return await this.post('/space/hook', {
-            body:{
+            body: {
                 url
             }
         });

@@ -5,7 +5,7 @@ export default class Collaborator {
         this._instance = instance;
     }
     
-    getIframe(width, height, params = []) {
+    getIframe(width, height, params = {}) {
         params['url'] = this._data['invite_link'] + '?api=' + this._instance.getPublickKey();
         return this._instance.getIframe(width, height, params);
     }
@@ -22,7 +22,7 @@ export default class Collaborator {
         return this._data;
     }
     
-    async update(displayname, status, params = []) {
+    async update(displayname, status, params = {}) {
         params['displayname'] = displayname;
         params['email'] = this._data['email'];
         params['status'] = status;
@@ -30,6 +30,7 @@ export default class Collaborator {
             body: params
         });
         this._data = res;
+        return res;
     }
     
     async remove() {
