@@ -150,7 +150,7 @@ export default class Instance {
     }
     
     initChannel(result) {
-        let channel = new this.Channel(this._public_key, this._public_key, this._whitelabel_url);
+        let channel = new this.Channel(this._public_key, this._private_key, this._whitelabel_url);
         channel.setRequestUrl(this.request_url);
         channel.setSlug(this._slug);
         channel.setResponseToken(result);
