@@ -17,6 +17,14 @@ export default class Channel extends Instance {
     setSlug(slug) {
         this.slug = slug;
     }
+    
+    setId(id) {
+        this.id = id;
+    }
+    
+    getId(id) {
+        return this.id;
+    }
 
     async setAccessRule(privacy, params = {}) {
         if(privacy == 'PRIVATE')

@@ -154,6 +154,7 @@ export default class Instance {
         channel.setRequestUrl(this.request_url);
         channel.setSlug(this._slug);
         channel.setResponseToken(result);
+        channel.setId(result.id);
         return channel;
     }
     
