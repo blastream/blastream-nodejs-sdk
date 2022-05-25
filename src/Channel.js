@@ -55,6 +55,19 @@ export default class Channel extends Instance {
         return await this.get('/channel/videos');
     }
     
+    async getSettings() {
+        return this.get('/channel/settings');
+    }
+    
+    async updateAdvancedSettings(params) {
+        let settings = await this.getSettings();
+        for(var i in params)
+            settings.advanced[i] = params[i];
+        return await this.updateSettings({
+            advanced: settings.advanced
+        });
+    }
+    
     async updateSettings(params) {
         return await this.post('/channel/settings', {
             body: {
@@ -110,11 +123,27 @@ export default class Channel extends Instance {
         return result;
     }
     
-    remove() {
+    async remove() {
         this._is_channel = false;
-        let result = this.delete('/space/' . this._slug);
+        let result = await this.delete('/space/' . this._slug);
         this._is_channel = true;
         return result;
+    }
+    
+    async startLivestreaming() {
+        return await this.post('/channel/livestreaming/start');
+    }
+    
+    async stopLivestreaming() {
+        return await this.post('/channel/livestreaming/stop');
+    }
+    
+    async startRecord() {
+        return await this.post('/channel/startrecord');
+    }
+    
+    async stopRecord() {
+        return await this.post('/channel/stoprecord');
     }
     
     async createOrGetCollaborator(displayname, status, params = {}) {

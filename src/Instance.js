@@ -154,6 +154,7 @@ export default class Instance {
         channel.setRequestUrl(this.request_url);
         channel.setSlug(this._slug);
         channel.setResponseToken(result);
+        console.log('resut', result);
         channel.setId(result.id);
         return channel;
     }
@@ -172,7 +173,9 @@ export default class Instance {
     
     async createOrGetChannel(slug, params = {}) {
         this.setSlug(slug);
-        let result = await this.post('/space/channel/' + this._slug, params);
+        let result = await this.post('/space/channel/' + this._slug, {
+            body: params
+        });
         return this.initChannel(result);
     }
 

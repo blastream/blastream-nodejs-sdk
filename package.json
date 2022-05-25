@@ -1,6 +1,6 @@
 {
   "name": "blastream",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "package to play with blastream Rest API easily through a node module",
   "type": "module",
   "main": "build/blastream.js",
