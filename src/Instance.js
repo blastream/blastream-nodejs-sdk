@@ -156,6 +156,8 @@ export default class Instance {
         channel.setResponseToken(result);
         console.log('resut', result);
         channel.setId(result.id);
+        if(result.prefix)
+            channel.setApiPrefix(result.prefix);
         return channel;
     }
     
@@ -197,6 +199,13 @@ export default class Instance {
         });
         
         return this.initChannel(result);
+    }
+    
+    cloneChannel(channelSlugSource, channelSlugTarget, params = {}) {
+        params['slug'] = $channelSlugTarget;
+        return await this.post('/space/channel/' + channelSlugSource + '/clone', {
+            body: params
+        });
     }
     
     setResponseToken(res) {
