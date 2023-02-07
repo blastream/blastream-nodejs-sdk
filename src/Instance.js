@@ -201,8 +201,8 @@ export default class Instance {
         return this.initChannel(result);
     }
     
-    cloneChannel(channelSlugSource, channelSlugTarget, params = {}) {
-        params['slug'] = $channelSlugTarget;
+    async cloneChannel(channelSlugSource, channelSlugTarget, params = {}) {
+        params['slug'] = channelSlugTarget;
         return await this.post('/space/channel/' + channelSlugSource + '/clone', {
             body: params
         });
