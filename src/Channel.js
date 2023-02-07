@@ -12,6 +12,7 @@ export default class Channel extends Instance {
     constructor(public_key, private_key, custom_domain = '') {
         super(public_key, private_key, custom_domain);
         this._is_channel = true;
+        this._apiPrefix = '';
     }
     
     setSlug(slug) {
@@ -220,6 +221,42 @@ export default class Channel extends Instance {
         let res = await this.uploadPic(file, file, type);
         res['file'] = './docs' + res['file'];
         return res;
+    }
+    
+    setApiPrefix(prefix) {
+        this._apiPrefix = prefix;
+    }
+
+    getApiPrefix() {
+        return this._apiPrefix;
+    }
+
+    async setMode(mode) {
+        if(mode == 'vodToLive') {
+            let settings = await this.getSettings();
+            settings.advanced.live_blastream_source = 'vod';
+            settings.advanced.live_proto = 'hls';
+            await this.updateSettings({
+                advanced: settings.advanced,
+                autojoin: 0,
+                autolivestream: 1,
+                allowed_request_cam: 0
+            });
+        }
+
+    }
+
+    async getSession() {
+        return await this.get('/live/session?channel_slug=' + this._slug);
+    }
+
+    async startSession() {
+        let session = this.getSession();
+        return await this.get('/videoconf/' + this._id + '/session/' . session.token);
+    }
+
+    async stopSession() {
+        return await this.post('/channel/' + this._apiPrefix + '_' + this._apiPrefix + '_' + this._slug + '/stopvisio');
     }
     
     
