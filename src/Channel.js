@@ -16,15 +16,27 @@ export default class Channel extends Instance {
     }
     
     setSlug(slug) {
-        this.slug = slug;
+        this._slug = slug;
+    }
+    
+    getSlug() {
+        return this._slug;
     }
     
     setId(id) {
-        this.id = id;
+        this._id = id;
     }
     
-    getId(id) {
-        return this.id;
+    getId() {
+        return this._id;
+    }
+    
+    setJustBeenCreated(justBeenCreated) {
+        this._justBeenCreated = justBeenCreated;
+    }
+    
+    hasJustBeenCreated() {
+        return this._justBeenCreated;
     }
 
     async setAccessRule(privacy, params = {}) {

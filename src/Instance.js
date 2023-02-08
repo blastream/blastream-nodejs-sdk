@@ -156,6 +156,7 @@ export default class Instance {
         channel.setResponseToken(result);
         console.log('resut', result);
         channel.setId(result.id);
+        channel.setJustBeenCreated(result.justBeenCreated);
         if(result.prefix)
             channel.setApiPrefix(result.prefix);
         return channel;
