@@ -1,8 +1,8 @@
 {
   "name": "blastream",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "package to play with blastream Rest API easily through a node module",
-  "type": "module",
+  "type": "commonjs",
   "main": "build/blastream.js",
   "scripts": {
     "build": "webpack"
